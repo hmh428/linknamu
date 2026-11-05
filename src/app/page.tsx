@@ -1,22 +1,6 @@
-import { Suspense } from "react";
-import { connection } from "next/server";
 import LinkList from "@/components/LinkList";
 import ProfileHeader from "@/components/ProfileHeader";
 import { profile } from "@/data/profile";
-import { getClickCounts } from "@/lib/mongodb";
-
-// 클릭 수는 요청마다 최신 값이 필요하므로 이 부분만 동적으로 스트리밍합니다.
-async function LinksWithCounts() {
-  await connection();
-  const clickCounts = await getClickCounts();
-  return (
-    <LinkList
-      links={profile.links}
-      clickCounts={clickCounts}
-      showCounts={Boolean(process.env.MONGODB_URI)}
-    />
-  );
-}
 
 export default function Home() {
   return (
@@ -29,9 +13,8 @@ export default function Home() {
       </div>
       <div className="flex w-full max-w-sm flex-col items-center gap-10">
         <ProfileHeader name={profile.name} bio={profile.bio} image={profile.image} />
-        <Suspense fallback={<LinkList links={profile.links} clickCounts={{}} showCounts={false} />}>
-          <LinksWithCounts />
-        </Suspense>
+        {/* 클릭 수는 브라우저에서 /api/click으로 받아와 채웁니다 */}
+        <LinkList links={profile.links} />
         <footer className="mt-auto pt-6 text-xs tracking-wide text-muted/70">링크나무</footer>
       </div>
     </main>

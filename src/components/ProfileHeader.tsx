@@ -16,6 +16,8 @@ export default function ProfileHeader({ name, bio, image }: Props) {
           width={112}
           height={112}
           priority
+          // 외부 이미지(placehold.co 등, SVG 포함)는 최적화 없이 그대로 로드
+          unoptimized={image.startsWith("http")}
           className="h-28 w-28 rounded-full object-cover ring-4 ring-white shadow-md"
         />
       ) : (

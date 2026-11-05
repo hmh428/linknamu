@@ -20,11 +20,11 @@ export default function LinkCard({ link, clicks }: Props) {
       target="_blank"
       rel="noopener noreferrer"
       onClick={recordClick}
-      className="relative block w-full rounded-2xl border border-neutral-200 bg-white px-5 py-4 text-center font-medium shadow-sm transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
+      className="relative block w-full rounded-3xl border border-white/60 bg-white/40 px-14 py-[18px] text-center text-[15px] font-semibold shadow-[0_4px_20px_-6px_rgba(160,90,40,0.18)] backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-px hover:bg-white/60 hover:shadow-[0_8px_28px_-8px_rgba(160,90,40,0.25)] active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
     >
       {link.title}
       {clicks !== undefined && (
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-neutral-400">
+        <span className="absolute right-5 top-1/2 -translate-y-1/2 text-xs font-normal tabular-nums text-muted/80">
           {clicks.toLocaleString()}회
         </span>
       )}
